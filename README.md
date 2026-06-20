@@ -7,7 +7,6 @@
 
 Every organization has IAM policies full of vulnerabilities, conflicts, and dead code. Most organizations don't know about them until something breaks—or worse, until a security incident. This tool finds them in seconds.
 
-![Screenshot](docs/example-output.txt)
 
 ## 🎯 What It Does
 

@@ -232,10 +232,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## 📚 Documentation
 
-- [Installation Guide](docs/INSTALL.md)
-- [User Guide](docs/GUIDE.md)
-- [Check Reference](docs/CHECKS.md)
-- [API Documentation](docs/API.md)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ## 🔗 Resources

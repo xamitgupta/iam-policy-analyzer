@@ -1,0 +1,31 @@
+{
+  "Name": "BadPolicy-SensitiveWithoutMFA",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "IAMAdministration",
+      "Effect": "Allow",
+      "Principal": {"AWS": "arn:aws:iam::123456789012:role/developers"},
+      "Action": [
+        "iam:DeleteUser",
+        "iam:DeleteAccessKey",
+        "iam:DeletePolicy"
+      ],
+      "Resource": "arn:aws:iam::123456789012:*"
+    },
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Principal": {"AWS": "arn:aws:iam::123456789012:role/app-server"},
+      "Action": "s3:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "RolePassage",
+      "Effect": "Allow",
+      "Principal": {"AWS": "arn:aws:iam::123456789012:role/ci-pipeline"},
+      "Action": "iam:PassRole",
+      "Resource": "*"
+    }
+  ]
+}

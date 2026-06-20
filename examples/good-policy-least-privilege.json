@@ -1,0 +1,60 @@
+{
+  "Name": "GoodPolicy-LeastPrivilege",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3ReadSpecificBucket",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:role/lambda-processor"
+      },
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::my-secure-bucket",
+        "arn:aws:s3:::my-secure-bucket/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:SecureTransport": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DynamoDBAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:role/lambda-processor"
+      },
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:BatchGetItem"
+      ],
+      "Resource": "arn:aws:dynamodb:us-east-1:123456789012:table/users",
+      "Condition": {
+        "StringLike": {
+          "dynamodb:LeadingKeys": [
+            "${aws:username}"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "AllowAssumeSpecificRole",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:role/ci-pipeline"
+      },
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::123456789012:role/deployment-role",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "unique-external-id-12345"
+        }
+      }
+    }
+  ]
+}
